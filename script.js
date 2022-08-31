@@ -12,4 +12,7 @@ function addColorToDom() {
 
 window.onload = function () {
   addColorToDom();
+
+  const btnGenerateRandomColors = document.getElementById('button-random-color');
+  btnGenerateRandomColors.addEventListener('click', addColorToDom)
 }
