@@ -14,4 +14,5 @@ function addColorToDom() {
   }
 }
 
-console.log(addColorToDom());
+
+window.onload = addColorToDom();
