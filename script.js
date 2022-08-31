@@ -13,6 +13,8 @@ function createPalette() {
 function addColorToDom() {
   const domColors = document.querySelectorAll('.color');
   domColors[0].style.backgroundColor = 'black';
+  domColors[0].classList.add('selected');
+  
 
   if (!localStorage.getItem('colorPalette')) {
     createPalette();
