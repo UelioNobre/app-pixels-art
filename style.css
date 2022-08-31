@@ -9,3 +9,7 @@
   border: 1px solid black;
 }
 
+#button-random-color {
+  margin: 0;
+  height: 50px;
+}

@@ -1,9 +1,5 @@
-function generateRandomNumbers() {
-  return parseInt(Math.random() * 255);
-}
-
 function createRandomColor() {
-  return `rgb(${generateRandomNumbers()}, ${generateRandomNumbers()}, ${generateRandomNumbers()})`;
+  return `#${Math.random().toString(16).substring(2, 8)}`;
 }
 
 function addColorToDom() {
@@ -14,5 +10,6 @@ function addColorToDom() {
   }
 }
 
-
-window.onload = addColorToDom();
+window.onload = function () {
+  addColorToDom();
+}
