@@ -32,14 +32,35 @@ function requisito3() {
   requisito2();
 }
 
-function eventsListeners() {
+// ouvite botao gera cor aleatoria
+function eventListenerButtonRandomColor() {
   const buttonRandomColor = document.getElementById('button-random-color');
   buttonRandomColor.addEventListener('click', requisito3);
   buttonRandomColor.addEventListener('click', saveColors);
 }
 
+// Seleciona uma cor
+function paletteSelectColor(e) {
+  const colorPalette = document.querySelectorAll('.color');
+  for (let index = 0; index < colorPalette.length; index += 1) {
+    colorPalette[index].classList.remove('selected');
+    if (colorPalette[index] === e.target) {
+      colorPalette[index].classList.add('selected');
+    }
+  }
+}
+
+// ouvite que seleciona as cores
+function eventListenerSelectColor() {
+  const colorPalette = document.querySelectorAll('.color');
+  for (let index = 0; index < colorPalette.length; index += 1) {
+    colorPalette[index].addEventListener('click', paletteSelectColor);
+  }
+}
+
 window.onload = () => {
   requisito2();
-  eventsListeners();
   getColors();
+  eventListenerButtonRandomColor();
+  eventListenerSelectColor();
 };
