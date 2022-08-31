@@ -8,6 +8,7 @@ function createRandomColor() {
 
 function addColorToDom() {
   const domColors = document.querySelectorAll('.color');
+  domColors[0].style.backgroundColor = 'black';
   for (let index = 1; index < domColors.length; index+= 1) {
     domColors[index].style.backgroundColor = `${createRandomColor()}`;
   }
