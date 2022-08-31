@@ -5,14 +5,14 @@ function createRandomColor() {
 function addColorToDom() {
   const domColors = document.querySelectorAll('.color');
   domColors[0].style.backgroundColor = 'black';
-  for (let index = 1; index < domColors.length; index+= 1) {
+  for (let index = 1; index < domColors.length; index += 1) {
     domColors[index].style.backgroundColor = `${createRandomColor()}`;
   }
 }
 
-window.onload = function () {
+window.onload = () => {
   addColorToDom();
 
   const btnGenerateRandomColors = document.getElementById('button-random-color');
-  btnGenerateRandomColors.addEventListener('click', addColorToDom)
-}
+  btnGenerateRandomColors.addEventListener('click', addColorToDom);
+};
