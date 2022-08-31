@@ -16,3 +16,7 @@
   border: 1px solid;
   transform: translateY(-21px);
 }
+
+.pixel {
+  background-color: white;
+}
