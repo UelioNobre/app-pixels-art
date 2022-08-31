@@ -14,7 +14,6 @@ function addColorToDom() {
   const domColors = document.querySelectorAll('.color');
   domColors[0].style.backgroundColor = 'black';
   domColors[0].classList.add('selected');
-  
 
   if (!localStorage.getItem('colorPalette')) {
     createPalette();
@@ -31,9 +30,41 @@ function createNewPalette() {
   addColorToDom();
 }
 
+function selectColor(e) {
+  // rermove todas as cores
+  console.log(e.target);
+
+  const palettes = document.querySelectorAll('.color');
+  for (let index = 0; index < palettes.length; index += 1) {
+    if (e.target === palettes[index]) {
+      palettes[index].classList.add('selected');
+      localStorage.setItem('currentColor', JSON.stringify(palettes[index].style.backgroundColor));
+    } else {
+      palettes[index].classList.remove('selected');
+    }
+  }
+}
+
+function paintPixel(e) {
+  const color = JSON.parse(localStorage.getItem('currentColor'));
+  e.target.style.backgroundColor = color;
+}
+
 window.onload = () => {
   addColorToDom();
 
   const btnGenerateRandomColors = document.getElementById('button-random-color');
   btnGenerateRandomColors.addEventListener('click', createNewPalette);
+
+  const palettes = document.querySelectorAll('.color');
+  for (let index = 0; index < palettes.length; index += 1) {
+    palettes[index].addEventListener('click', selectColor);
+    palettes[index].classList.remove('selected');
+  }
+
+  // Clique no pixel
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].addEventListener('click', paintPixel);
+  }
 };
