@@ -58,9 +58,24 @@ function eventListenerSelectColor() {
   }
 }
 
+// pintando os pixels
+function paintPixel(e) {
+  const currentColor = document.querySelector('.selected').style.backgroundColor;
+  e.target.style.backgroundColor = currentColor;
+}
+
+// ouvinte dos pixels
+function eventListenerPixelBoard() {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].addEventListener('click', paintPixel);
+  }
+}
+
 window.onload = () => {
   requisito2();
   getColors();
   eventListenerButtonRandomColor();
   eventListenerSelectColor();
+  eventListenerPixelBoard();
 };
