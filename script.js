@@ -140,6 +140,7 @@ function generateBoard() {
   if (inputBoardSize > 50) inputBoardSize = 50;
 
   generatePixels(inputBoardSize);
+  eventListenerPixelBoard();
   clearBoard();
   clearBoardLocalStorage();
 }
