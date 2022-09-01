@@ -111,6 +111,7 @@ function clearBoardLocalStorage() {
   localStorage.removeItem('pixelBoard');
 }
 
+// adicionar o tamanho de size aqui
 function generatePixels(size) {
   const pixelBoard = document.querySelector('#pixel-board');
   pixelBoard.innerHTML = null;
@@ -134,8 +135,19 @@ function saveBoardSize(size) {
   localStorage.setItem('boardSize', size);
 }
 
+// Obtem tamanho do board para cria-lo
+function getBoardLocalStorage() {
+  if (!localStorage.getItem('boardSize')) {
+    localStorage.setItem('boardSize', 5);
+  }
+
+  const size = Math.round(localStorage.getItem('boardSize'));
+  generatePixels(size);
+}
+
 function generateBoard() {
-  let inputBoardSize = parseInt(document.querySelector('#board-size').value, 10);
+  const inputBoard = document.querySelector('#board-size');
+  let inputBoardSize = parseInt(inputBoard.value, 10);
   if (Number.isNaN(inputBoardSize) === true || inputBoardSize < 1) {
     alert('Board inválido!');
     return;
@@ -143,6 +155,8 @@ function generateBoard() {
 
   if (inputBoardSize < 5) inputBoardSize = 5;
   if (inputBoardSize > 50) inputBoardSize = 50;
+
+  inputBoard.value = inputBoardSize;
 
   saveBoardSize(inputBoardSize);
   generatePixels(inputBoardSize);
@@ -157,6 +171,7 @@ function eventListenerGenerateBoard() {
 }
 
 window.onload = () => {
+  getBoardLocalStorage();
   requisito2();
   getColors();
   getPixelsState();
