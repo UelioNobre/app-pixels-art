@@ -129,6 +129,11 @@ function generatePixels(size) {
   pixels = document.querySelectorAll('.pixel');
 }
 
+// Salva o tamanho do board em localStorage
+function saveBoardSize(size) {
+  localStorage.setItem('boardSize', size);
+}
+
 function generateBoard() {
   let inputBoardSize = parseInt(document.querySelector('#board-size').value, 10);
   if (Number.isNaN(inputBoardSize) === true || inputBoardSize < 1) {
@@ -139,6 +144,7 @@ function generateBoard() {
   if (inputBoardSize < 5) inputBoardSize = 5;
   if (inputBoardSize > 50) inputBoardSize = 50;
 
+  saveBoardSize(inputBoardSize);
   generatePixels(inputBoardSize);
   eventListenerPixelBoard();
   clearBoard();
