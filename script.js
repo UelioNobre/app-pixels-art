@@ -58,10 +58,36 @@ function eventListenerSelectColor() {
   }
 }
 
+// Obtenho o desenho do usuario
+function getPixelsState() {
+  if (!localStorage.getItem('pixelBoard')) return;
+
+  const pixelsState = JSON.parse(localStorage.getItem('pixelBoard'));
+  const pixels = document.querySelectorAll('.pixel');
+
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].setAttribute('style', `background-color: ${pixelsState[index]}`);
+  }
+}
+
+// Salva o desenho do usuário
+function savePixelsState() {
+  const pixelsState = [];
+
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixelsState[index] = pixels[index].style.backgroundColor;
+  }
+
+  localStorage.setItem('pixelBoard', JSON.stringify(pixelsState));
+}
+
 // pintando os pixels
 function paintPixel(e) {
   const currentColor = document.querySelector('.selected').style.backgroundColor;
   e.target.style.backgroundColor = currentColor;
+
+  savePixelsState();
 }
 
 // ouvinte dos pixels
@@ -88,6 +114,7 @@ function eventListenerclearBoard() {
 window.onload = () => {
   requisito2();
   getColors();
+  getPixelsState();
   eventListenerButtonRandomColor();
   eventListenerSelectColor();
   eventListenerPixelBoard();
