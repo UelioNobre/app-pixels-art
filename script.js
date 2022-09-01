@@ -106,6 +106,27 @@ function eventListenerclearBoard() {
   document.querySelector('#clear-board').addEventListener('click', clearBoard);
 }
 
+// Requisito 13 - generate-board
+function clearBoardLocalStorage() {
+  localStorage.removeItem('pixelBoard');
+}
+
+function generateBoard() {
+  const inputBoardSize = parseInt(document.querySelector('#board-size').value, 10);
+  if (Number.isNaN(inputBoardSize) === true || inputBoardSize < 1) {
+    alert('Board inválido!');
+    return;
+  }
+
+  clearBoard();
+  clearBoardLocalStorage();
+}
+
+// ouvinte generate board
+function eventListenerGenerateBoard() {
+  document.querySelector('#generate-board').addEventListener('click', generateBoard);
+}
+
 window.onload = () => {
   requisito2();
   getColors();
@@ -114,4 +135,5 @@ window.onload = () => {
   eventListenerSelectColor();
   eventListenerPixelBoard();
   eventListenerclearBoard();
+  eventListenerGenerateBoard();
 };
