@@ -2,12 +2,13 @@ let cores = ['black', 'red', 'green', 'blue'];
 let pixels = document.querySelectorAll('.pixel');
 const colorPalette = document.querySelectorAll('.color');
 
-// Requisito 5
+// Salva as cores em localStorage
 function saveColors() {
   localStorage.setItem('colorPalette', JSON.stringify(cores));
 }
 
-function getColors() {
+// Obtem as cores do localStorage
+function getColorsOfLocalStorage() {
   if (!localStorage.getItem('colorPalette')) {
     saveColors();
   }
@@ -17,8 +18,8 @@ function getColors() {
 }
 
 // Adiciona cores à paleta
-function requisito2() {
-  const colors = getColors();
+function addColorToPalette() {
+  const colors = getColorsOfLocalStorage();
   for (let index = 0; index < colorPalette.length; index += 1) {
     colorPalette[index].style.backgroundColor = colors[index];
   }
@@ -31,7 +32,7 @@ function requisito3() {
     cores[index] = corAleatoria;
   }
   saveColors();
-  requisito2();
+  addColorToPalette();
 }
 
 // ouvite botao gera cor aleatoria
@@ -145,6 +146,7 @@ function getBoardLocalStorage() {
   generatePixels(size);
 }
 
+// Gera o board de acordo com o tamanho
 function generateBoard() {
   const inputBoard = document.querySelector('#board-size');
   let inputBoardSize = parseInt(inputBoard.value, 10);
@@ -172,9 +174,9 @@ function eventListenerGenerateBoard() {
 
 window.onload = () => {
   getBoardLocalStorage();
-  requisito2();
-  getColors();
+  getColorsOfLocalStorage();
   getPixelsState();
+  addColorToPalette();
   eventListenerButtonRandomColor();
   eventListenerSelectColor();
   eventListenerPixelBoard();
