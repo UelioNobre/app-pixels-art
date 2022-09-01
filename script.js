@@ -1,9 +1,12 @@
 let cores = ['black', 'red', 'green', 'blue'];
+const pixels = document.querySelectorAll('.pixel');
+const colorPalette = document.querySelectorAll('.color');
 
 // Requisito 5
 function saveColors() {
   localStorage.setItem('colorPalette', JSON.stringify(cores));
 }
+
 function getColors() {
   if (!localStorage.getItem('colorPalette')) {
     saveColors();
@@ -15,10 +18,9 @@ function getColors() {
 
 // Adiciona cores à paleta
 function requisito2() {
-  const divColors = document.querySelectorAll('.color');
   const colors = getColors();
-  for (let index = 0; index < divColors.length; index += 1) {
-    divColors[index].style.backgroundColor = colors[index];
+  for (let index = 0; index < colorPalette.length; index += 1) {
+    colorPalette[index].style.backgroundColor = colors[index];
   }
 }
 
@@ -41,7 +43,6 @@ function eventListenerButtonRandomColor() {
 
 // Seleciona uma cor
 function paletteSelectColor(e) {
-  const colorPalette = document.querySelectorAll('.color');
   for (let index = 0; index < colorPalette.length; index += 1) {
     colorPalette[index].classList.remove('selected');
     if (colorPalette[index] === e.target) {
@@ -52,7 +53,6 @@ function paletteSelectColor(e) {
 
 // ouvite que seleciona as cores
 function eventListenerSelectColor() {
-  const colorPalette = document.querySelectorAll('.color');
   for (let index = 0; index < colorPalette.length; index += 1) {
     colorPalette[index].addEventListener('click', paletteSelectColor);
   }
@@ -63,8 +63,6 @@ function getPixelsState() {
   if (!localStorage.getItem('pixelBoard')) return;
 
   const pixelsState = JSON.parse(localStorage.getItem('pixelBoard'));
-  const pixels = document.querySelectorAll('.pixel');
-
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].setAttribute('style', `background-color: ${pixelsState[index]}`);
   }
@@ -74,7 +72,6 @@ function getPixelsState() {
 function savePixelsState() {
   const pixelsState = [];
 
-  const pixels = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixels.length; index += 1) {
     pixelsState[index] = pixels[index].style.backgroundColor;
   }
@@ -92,15 +89,13 @@ function paintPixel(e) {
 
 // ouvinte dos pixels
 function eventListenerPixelBoard() {
-  const pixels = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].addEventListener('click', paintPixel);
   }
 }
 
-// Requisito 11
+// limpa o quadro
 function clearBoard() {
-  const pixels = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].removeAttribute('style');
   }
