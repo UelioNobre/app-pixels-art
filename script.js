@@ -72,10 +72,24 @@ function eventListenerPixelBoard() {
   }
 }
 
+// Requisito 11
+function clearBoard() {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].removeAttribute('style');
+  }
+}
+
+// ouvinte limpa os pixels
+function eventListenerclearBoard() {
+  document.querySelector('#clear-board').addEventListener('click', clearBoard);
+}
+
 window.onload = () => {
   requisito2();
   getColors();
   eventListenerButtonRandomColor();
   eventListenerSelectColor();
   eventListenerPixelBoard();
+  eventListenerclearBoard();
 };
