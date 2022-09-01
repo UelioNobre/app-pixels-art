@@ -1,5 +1,5 @@
 let cores = ['black', 'red', 'green', 'blue'];
-const pixels = document.querySelectorAll('.pixel');
+let pixels = document.querySelectorAll('.pixel');
 const colorPalette = document.querySelectorAll('.color');
 
 // Requisito 5
@@ -111,13 +111,35 @@ function clearBoardLocalStorage() {
   localStorage.removeItem('pixelBoard');
 }
 
+function generatePixels(size) {
+  const pixelBoard = document.querySelector('#pixel-board');
+  pixelBoard.innerHTML = null;
+
+  for (let row = 0; row < size; row += 1) {
+    const divRow = document.createElement('div');
+    for (let col = 0; col < size; col += 1) {
+      const divPixel = document.createElement('div');
+      divPixel.className = 'pixel';
+      divRow.appendChild(divPixel);
+    }
+    pixelBoard.append(divRow);
+  }
+
+  // update pixel
+  pixels = document.querySelectorAll('.pixel');
+}
+
 function generateBoard() {
-  const inputBoardSize = parseInt(document.querySelector('#board-size').value, 10);
+  let inputBoardSize = parseInt(document.querySelector('#board-size').value, 10);
   if (Number.isNaN(inputBoardSize) === true || inputBoardSize < 1) {
     alert('Board inválido!');
     return;
   }
 
+  if (inputBoardSize < 5) inputBoardSize = 5;
+  if (inputBoardSize > 50) inputBoardSize = 50;
+
+  generatePixels(inputBoardSize);
   clearBoard();
   clearBoardLocalStorage();
 }
