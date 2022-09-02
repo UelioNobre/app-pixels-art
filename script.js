@@ -9,9 +9,7 @@ function saveColors() {
 
 // Obtem as cores do localStorage
 function getColorsOfLocalStorage() {
-  if (!localStorage.getItem('colorPalette')) {
-    saveColors();
-  }
+  if (!localStorage.getItem('colorPalette')) saveColors();
 
   cores = JSON.parse(localStorage.getItem('colorPalette'));
   return cores;
@@ -46,9 +44,7 @@ function eventListenerButtonRandomColor() {
 function paletteSelectColor(e) {
   for (let index = 0; index < colorPalette.length; index += 1) {
     colorPalette[index].classList.remove('selected');
-    if (colorPalette[index] === e.target) {
-      colorPalette[index].classList.add('selected');
-    }
+    if (colorPalette[index] === e.target) colorPalette[index].classList.add('selected');
   }
 }
 
@@ -138,9 +134,7 @@ function saveBoardSize(size) {
 
 // Obtem tamanho do board para cria-lo
 function getBoardLocalStorage() {
-  if (!localStorage.getItem('boardSize')) {
-    localStorage.setItem('boardSize', 5);
-  }
+  if (!localStorage.getItem('boardSize')) localStorage.setItem('boardSize', 5);
 
   const size = Math.round(localStorage.getItem('boardSize'));
   generatePixels(size);
