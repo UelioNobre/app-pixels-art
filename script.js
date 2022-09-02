@@ -1,6 +1,7 @@
 let cores = ['black', 'red', 'green', 'blue'];
 let pixels = document.querySelectorAll('.pixel');
 const colorPalette = document.querySelectorAll('.color');
+const buttonRandomColor = document.getElementById('button-random-color');
 
 // Salva as cores em localStorage
 function saveColors() {
@@ -32,12 +33,6 @@ function requisito3() {
   addColorToPalette();
 }
 
-// ouvite botao gera cor aleatoria
-function eventListenerButtonRandomColor() {
-  const buttonRandomColor = document.getElementById('button-random-color');
-  buttonRandomColor.addEventListener('click', requisito3);
-  buttonRandomColor.addEventListener('click', saveColors);
-}
 
 // Seleciona uma cor
 function paletteSelectColor(e) {
@@ -47,12 +42,6 @@ function paletteSelectColor(e) {
   }
 }
 
-// ouvite que seleciona as cores
-function eventListenerSelectColor() {
-  for (let index = 0; index < colorPalette.length; index += 1) {
-    colorPalette[index].addEventListener('click', paletteSelectColor);
-  }
-}
 
 // Obtenho o desenho do usuario
 function getPixelsState() {
@@ -80,8 +69,14 @@ function paintPixel(e) {
   savePixelsState();
 }
 
-// ouvinte dos pixels
-function eventListenerPixelBoard() {
+// Set listeners
+function setListeners() {
+  buttonRandomColor.addEventListener('click', requisito3);
+  buttonRandomColor.addEventListener('click', saveColors);
+  document.querySelector('#clear-board').addEventListener('click', clearBoard);
+  for (let index = 0; index < colorPalette.length; index += 1) {
+    colorPalette[index].addEventListener('click', paletteSelectColor);
+  }
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].addEventListener('click', paintPixel);
   }
@@ -92,11 +87,6 @@ function clearBoard() {
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].removeAttribute('style');
   }
-}
-
-// ouvinte limpa os pixels
-function eventListenerclearBoard() {
-  document.querySelector('#clear-board').addEventListener('click', clearBoard);
 }
 
 // Requisito 13 - generate-board
@@ -151,7 +141,7 @@ function generateBoard() {
 
   saveBoardSize(inputBoardSize);
   generatePixels(inputBoardSize);
-  eventListenerPixelBoard();
+  setListeners();
   clearBoard();
   clearBoardLocalStorage();
 }
@@ -166,9 +156,6 @@ window.onload = () => {
   getColorsOfLocalStorage();
   getPixelsState();
   addColorToPalette();
-  eventListenerButtonRandomColor();
-  eventListenerSelectColor();
-  eventListenerPixelBoard();
-  eventListenerclearBoard();
+  setListeners();
   eventListenerGenerateBoard();
 };
