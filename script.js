@@ -10,7 +10,6 @@ function saveColors() {
 // Obtem as cores do localStorage
 function getColorsOfLocalStorage() {
   if (!localStorage.getItem('colorPalette')) saveColors();
-
   cores = JSON.parse(localStorage.getItem('colorPalette'));
   return cores;
 }
@@ -68,11 +67,9 @@ function getPixelsState() {
 // Salva o desenho do usuário
 function savePixelsState() {
   const pixelsState = [];
-
   for (let index = 0; index < pixels.length; index += 1) {
     pixelsState[index] = pixels[index].style.backgroundColor;
   }
-
   localStorage.setItem('pixelBoard', JSON.stringify(pixelsState));
 }
 
@@ -80,7 +77,6 @@ function savePixelsState() {
 function paintPixel(e) {
   const currentColor = document.querySelector('.selected').style.backgroundColor;
   e.target.style.backgroundColor = currentColor;
-
   savePixelsState();
 }
 
@@ -135,7 +131,6 @@ function saveBoardSize(size) {
 // Obtem tamanho do board para cria-lo
 function getBoardLocalStorage() {
   if (!localStorage.getItem('boardSize')) localStorage.setItem('boardSize', 5);
-
   const size = Math.round(localStorage.getItem('boardSize'));
   generatePixels(size);
 }
