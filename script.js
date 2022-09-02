@@ -1,11 +1,17 @@
 let cores = ['black', 'red', 'green', 'blue'];
 let pixels = document.querySelectorAll('.pixel');
+const pixelBoard = document.querySelector('#pixel-board');
 const colorPalette = document.querySelectorAll('.color');
 const buttonRandomColor = document.getElementById('button-random-color');
 
+// salva no localStorage
+function saveLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
 // Salva as cores em localStorage
 function saveColors() {
-  localStorage.setItem('colorPalette', JSON.stringify(cores));
+  saveLocalStorage('colorPalette', cores);
 }
 
 // Obtem as cores do localStorage
@@ -33,7 +39,6 @@ function requisito3() {
   addColorToPalette();
 }
 
-
 // Seleciona uma cor
 function paletteSelectColor(e) {
   for (let index = 0; index < colorPalette.length; index += 1) {
@@ -41,7 +46,6 @@ function paletteSelectColor(e) {
     if (colorPalette[index] === e.target) colorPalette[index].classList.add('selected');
   }
 }
-
 
 // Obtenho o desenho do usuario
 function getPixelsState() {
@@ -69,6 +73,14 @@ function paintPixel(e) {
   savePixelsState();
 }
 
+// limpa o quadro
+function clearBoard() {
+  localStorage.removeItem('pixelBoard');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].removeAttribute('style');
+  }
+}
+
 // Set listeners
 function setListeners() {
   buttonRandomColor.addEventListener('click', requisito3);
@@ -82,21 +94,8 @@ function setListeners() {
   }
 }
 
-// limpa o quadro
-function clearBoard() {
-  for (let index = 0; index < pixels.length; index += 1) {
-    pixels[index].removeAttribute('style');
-  }
-}
-
-// Requisito 13 - generate-board
-function clearBoardLocalStorage() {
-  localStorage.removeItem('pixelBoard');
-}
-
 // adicionar o tamanho de size aqui
 function generatePixels(size) {
-  const pixelBoard = document.querySelector('#pixel-board');
   pixelBoard.innerHTML = null;
 
   for (let row = 0; row < size; row += 1) {
@@ -111,11 +110,6 @@ function generatePixels(size) {
 
   // update pixel
   pixels = document.querySelectorAll('.pixel');
-}
-
-// Salva o tamanho do board em localStorage
-function saveBoardSize(size) {
-  localStorage.setItem('boardSize', size);
 }
 
 // Obtem tamanho do board para cria-lo
@@ -139,11 +133,10 @@ function generateBoard() {
 
   inputBoard.value = inputBoardSize;
 
-  saveBoardSize(inputBoardSize);
+  saveLocalStorage('boardSize', inputBoardSize);
   generatePixels(inputBoardSize);
   setListeners();
   clearBoard();
-  clearBoardLocalStorage();
 }
 
 // ouvinte generate board
