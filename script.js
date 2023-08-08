@@ -78,7 +78,8 @@ function paintPixel(e) {
 // limpa o quadro
 function clearBoard() {
   localStorage.removeItem('pixelBoard');
-  for (let index = 0; index < pixels.length; index += 1) {
+  const pixelsLength = pixels.length;
+  for (let index = 0; index < pixelsLength; index += 1) {
     pixels[index].removeAttribute('style');
   }
 }
@@ -88,10 +89,15 @@ function setListeners() {
   buttonRandomColor.addEventListener('click', requisito3);
   buttonRandomColor.addEventListener('click', saveColors);
   document.querySelector('#clear-board').addEventListener('click', clearBoard);
-  for (let index = 0; index < colorPalette.length; index += 1) {
+
+  const palletLength = colorPalette.length;
+  const pixelsLength = pixels.length;
+
+  for (let index = 0; index < palletLength; index += 1) {
     colorPalette[index].addEventListener('click', paletteSelectColor);
   }
-  for (let index = 0; index < pixels.length; index += 1) {
+
+  for (let index = 0; index < pixelsLength; index += 1) {
     pixels[index].addEventListener('click', paintPixel);
   }
 }
