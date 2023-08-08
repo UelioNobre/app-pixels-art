@@ -42,7 +42,8 @@ function requisito3() {
 
 // Seleciona uma cor
 function paletteSelectColor(e) {
-  for (let index = 0; index < colorPalette.length; index += 1) {
+  const palletLength = colorPalette.length;
+  for (let index = 0; index < palletLength; index += 1) {
     colorPalette[index].classList.remove('selected');
     if (colorPalette[index] === e.target) colorPalette[index].classList.add('selected');
   }
