@@ -32,7 +32,8 @@ function addColorToPalette() {
 // Gera cores aleatorias
 function requisito3() {
   for (let index = 1; index < cores.length; index += 1) {
-    const corAleatoria = `#${Math.random().toString(16).substring(2, 8)}`;
+    const color = Math.random().toString(16).substring(2, 8);
+    const corAleatoria = `#${color}`;
     cores[index] = corAleatoria;
   }
   saveColors();
